@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AIに問い合わせ</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>AIに問い合わせ</h1>
+        <input type="text" id="inputText" placeholder="Enter text here..." />
+        <input type="text" id="apiKey" placeholder="API Key here..." />
+        <button id="sendRequest">問い合わせ</button>
+        <div id="response">
+            <p id="responseText"></p>
+        </div>
+    </div>
+
+    <script>
+        $("#sendRequest").on('click', async () => {
+
+            const apiUrl = 'https://###APIGatewayURL###/prod/invoke';
+            const apiKey = $("#apiKey").val();
+            const inputText = $("#inputText").val();
+            $("#responseText").text("生成中...");
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': apiKey
+                    },
+                    body: JSON.stringify({ prompt: inputText }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                $("#responseText").text(data.message);
+            } catch (error) {
+                $("#responseText").text(`Error: ${error.message}`);
+            }
+        });
+    </script>
+</body>
+
+</html>
