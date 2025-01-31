@@ -1,5 +1,8 @@
+import os
+
 from aws_cdk import (
     Stack,
+    RemovalPolicy,
     aws_s3 as s3,
     aws_s3_deployment as s3_deployment,
     aws_cloudfront as cloudfront,
@@ -19,13 +22,15 @@ class CloudFrontStack(Stack):
             self,
             id="cloudfront_bucket",
             bucket_name=s3_bucket_name,
+            removal_policy=RemovalPolicy.DESTROY,
+            auto_delete_objects=True,
         )
 
         s3_deployment.BucketDeployment(
             self,
             id="s3_deploy",
             sources=[
-                s3_deployment.Source.asset("asset"),
+                s3_deployment.Source.asset(os.path.join("asset", "html")),
             ],
             destination_bucket=cloudfront_bucket,
         )

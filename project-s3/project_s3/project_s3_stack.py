@@ -1,6 +1,7 @@
 from aws_cdk import (
     Duration,
     Stack,
+    RemovalPolicy,
     aws_s3,
     aws_kms,
 )
@@ -30,4 +31,6 @@ class ProjectS3Stack(Stack):
             encryption=aws_s3.BucketEncryption.KMS,
             encryption_key=s3_kms_key,
             bucket_key_enabled=True,
+            removal_policy=RemovalPolicy.DESTROY,
+            auto_delete_objects=True,
         )

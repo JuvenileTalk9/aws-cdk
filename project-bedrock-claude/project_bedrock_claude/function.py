@@ -37,7 +37,9 @@ class FunctionStack(Stack):
             id="claude_invoke_model_function",
             runtime=lambda_.Runtime.PYTHON_3_12,
             handler="lambda_function.lambda_handler",
-            code=lambda_.Code.from_asset(os.path.join("lambda", "claude_model_invoke")),
+            code=lambda_.Code.from_asset(
+                os.path.join("asset", "lambda", "claude_model_invoke")
+            ),
             timeout=Duration.minutes(1),
             role=iam_role_for_lambda,
         )
