@@ -7,6 +7,7 @@ AWS CDK（AWS リソースを宣言的にデプロイするIaCツール）のサ
 |[project-s3](https://github.com/JuvenileTalk9/aws-cdk/tree/main/project-s3)|SSE-KMS暗号化タイプを設定したS3バケット||
 |[project-ec2](https://github.com/JuvenileTalk9/aws-cdk/tree/main/project-ec2)|VPCとEC2||
 |[project-cloudfront](https://github.com/JuvenileTalk9/aws-cdk/tree/main/project-cloudfront)|CloudFront|S3の静的コンテンツを配信|
+|[project-bedrock-claude](https://github.com/JuvenileTalk9/aws-cdk/tree/main/project-bedrock-claude)|Bedrock|Bedrockにリクエストを投げるWebアプリ|
 
 ## 環境構築
 
